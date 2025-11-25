@@ -1,0 +1,73 @@
+# Comic Book / Graphic Novel Illustration Style Olog
+# Part of the Illustrative Visual Vocabulary taxonomy
+
+name: Comic Book / Graphic Novel
+id: comic_book
+
+description: |
+  Hard-edged illustration style with bold outlines, limited color palette,
+  and dramatic lighting. Used in comics, manga, and graphic novels.
+
+visual_parameters:
+  edge_treatment:
+    - hard, defined outlines
+    - consistent line weight
+    - bold contours
+    - crisp edges
+  
+  color_strategy:
+    - limited palette of 8-12 colors
+    - high contrast
+    - flat color blocking (no gradients)
+    - bold primaries and secondaries
+  
+  texture_approach:
+    - solid, non-photorealistic surfaces
+    - no photorealism
+    - graphic simplification
+    - uniform fill areas
+  
+  lighting_model:
+    - dramatic lighting
+    - high contrast shadows
+    - defined shadow edges
+    - no soft ambient glow
+  
+  line_weight:
+    - consistent line weight
+    - expressive line work
+    - visible strokes
+    - no thin/delicate lines
+  
+  depth_handling:
+    - flat layering
+    - clear silhouettes
+    - no depth of field blur
+    - sharp focus throughout
+  
+  compositional_rules:
+    - strong compositional balance
+    - bold shapes dominate
+    - clear foreground/background
+    - dramatic diagonal compositions
+
+negative_prompt_elements:
+  - photorealism
+  - soft gradients
+  - depth of field blur
+  - ambient occlusion
+  - photographic texture
+  - fine detail
+  - watercolor wash
+  - pastel
+
+use_cases:
+  - Superhero comics
+  - Manga
+  - Graphic novels
+  - Comic book covers
+  - Sequential art
+
+style_drift_prevention: |
+  The locked negative prompt elements explicitly block photorealistic rendering,
+  which is the primary style drift risk for comic book illustrations.

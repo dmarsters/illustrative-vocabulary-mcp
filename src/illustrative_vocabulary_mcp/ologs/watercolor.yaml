@@ -1,0 +1,80 @@
+# Watercolor Painting Style Olog
+# Part of the Illustrative Visual Vocabulary taxonomy
+
+name: Watercolor Painting
+id: watercolor
+
+description: |
+  Soft, organic illustration style emphasizing transparency and diffuse edges.
+  Characterized by luminous color mixing, visible paper texture, and wet effects.
+  Uses atmospheric perspective and color temperature for depth. Emphasizes
+  organic flow and improvisational appearance. Used in landscapes, fine art,
+  and atmospheric pieces.
+
+visual_parameters:
+  edge_treatment:
+    - soft, diffuse edges
+    - organic edge dissolution
+    - color bleeding
+    - watercolor wash effects
+  
+  color_strategy:
+    - transparent color layers
+    - luminous color mixing
+    - natural pigment appearance
+    - color glazing and transparency
+  
+  texture_approach:
+    - visible wet texture
+    - paper texture visible
+    - organic, flowing surfaces
+    - characteristic watercolor paper grain
+  
+  lighting_model:
+    - natural, atmospheric lighting
+    - warm, inviting illumination
+    - luminosity through transparency
+    - soft light diffusion
+  
+  line_weight:
+    - minimal or organic linework
+    - suggested forms
+    - flowing, gestural marks
+    - no hard outlines
+  
+  depth_handling:
+    - atmospheric perspective
+    - color temperature for depth
+    - gradual value transitions
+    - soft focus on backgrounds
+  
+  compositional_rules:
+    - loose, suggestive composition
+    - balance through color wash
+    - negative space is white paper
+    - improvisational feel
+
+negative_prompt_elements:
+  - hard edges
+  - graphic flattening
+  - digital smoothness
+  - heavy definition
+  - opaque coverage
+  - precise geometric forms
+  - vector graphics
+  - high contrast outlines
+
+use_cases:
+  - Landscape paintings
+  - Fine art watercolor
+  - Nature illustration
+  - Travel sketches
+  - Botanical illustration
+  - Atmospheric scenes
+  - Romantic or dreamy imagery
+
+style_drift_prevention: |
+  The negative blocks prevent hard edges, digital rendering, and graphic
+  simplification from overriding the soft, organic, and improvisational
+  nature of watercolor. Emphasis on transparency and paper texture prevents
+  drift toward digital or vector-based aesthetics.

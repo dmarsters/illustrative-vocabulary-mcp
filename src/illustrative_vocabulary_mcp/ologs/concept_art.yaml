@@ -1,0 +1,81 @@
+# Concept Art / Painting Style Olog
+# Part of the Illustrative Visual Vocabulary taxonomy
+
+name: Concept Art / Painting
+id: concept_art
+
+description: |
+  Painterly illustration style emphasizing cinematic composition and atmospheric
+  effects. Features rich, saturated colors with cinematic color grading and
+  volumetric lighting. Uses chiaroscuro, dramatic lighting, and brushwork
+  emphasis. Employed in game concept art, environment design, and narrative
+  painting. Balances technical skill with expressive mark-making.
+
+visual_parameters:
+  edge_treatment:
+    - varied edge treatment
+    - soft atmospheric edges
+    - hard edges for emphasis
+    - dynamic edge variation
+  
+  color_strategy:
+    - rich, saturated colors
+    - color harmony and balance
+    - atmospheric color shifts
+    - cinematic color grading
+  
+  texture_approach:
+    - painterly texture visible
+    - brushwork emphasis
+    - varied surface texture
+    - tactile paint application
+  
+  lighting_model:
+    - cinematic lighting
+    - dramatic chiaroscuro
+    - atmospheric effects
+    - volumetric lighting
+  
+  line_weight:
+    - varied linework
+    - painterly no-line approach
+    - form emphasis through value
+    - expressive mark-making
+  
+  depth_handling:
+    - atmospheric perspective
+    - volumetric depth
+    - soft background focus
+    - dramatic foreground/background separation
+  
+  compositional_rules:
+    - cinematic composition
+    - rule of thirds application
+    - dramatic diagonal lines
+    - environmental storytelling
+
+negative_prompt_elements:
+  - clean digital render
+  - graphic flatness
+  - technical precision
+  - photorealism
+  - vector graphics
+  - smooth gradients
+  - minimal composition
+  - lack of atmosphere
+
+use_cases:
+  - Game concept art
+  - Environment design
+  - Character concept art
+  - Narrative painting
+  - Background painting
+  - Cinematic illustration
+  - Visual development
+  - Matte painting
+
+style_drift_prevention: |
+  The negative blocks prevent clean digital rendering, graphic flatness, and
+  technical precision from overriding the painterly, cinematic, and atmospheric
+  nature of concept art. Emphasis on volumetric lighting and environmental
+  storytelling prevents drift toward photorealism or minimal composition.

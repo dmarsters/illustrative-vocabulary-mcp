@@ -1,0 +1,73 @@
+# Children's Book Illustration Style Olog
+# Part of the Illustrative Visual Vocabulary taxonomy
+
+name: Children's Book
+id: children_book
+
+description: |
+  Warm, inviting illustration style with soft edges and hand-drawn feeling.
+  Emphasizes accessibility, warmth, and playfulness through visible brushwork
+  and organic texture. Used in storybooks and children's content.
+
+visual_parameters:
+  edge_treatment:
+    - softer edges
+    - slightly rounded forms
+    - gentle line work
+    - some outline softness
+  
+  color_strategy:
+    - warm, inviting palette
+    - medium saturation
+    - accessible colors (not extreme contrast)
+    - playful, cheerful tones
+  
+  texture_approach:
+    - visible brushwork or marker quality
+    - organic texture
+    - hand-drawn feeling
+    - not smooth or digital-looking
+  
+  lighting_model:
+    - soft, warm lighting
+    - gentle highlights
+    - no harsh shadows
+    - ambient, approachable lighting
+  
+  line_weight:
+    - varied line weight for expressiveness
+    - visible hand-drawn strokes
+    - playful, loose linework
+    - warm and inviting
+  
+  depth_handling:
+    - readable depth but not extreme
+    - clear subjects
+    - soft focus backgrounds
+    - minimal depth of field effect
+  
+  compositional_rules:
+    - centered, balanced composition
+    - clear subject focus
+    - friendly negative space
+    - inviting arrangement
+
+negative_prompt_elements:
+  - photorealism
+  - harsh shadows
+  - extreme contrast
+  - dark moody lighting
+  - digital smooth texture
+  - precise geometric rendering
+  - adult aesthetic
+
+use_cases:
+  - Storybooks
+  - Children's illustrations
+  - Picture books
+  - Playful character design
+  - Children's content
+
+style_drift_prevention: |
+  The negative blocks prevent adult/dark aesthetics and photorealism from
+  overriding the warm, child-friendly nature of the style.

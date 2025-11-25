@@ -1,0 +1,78 @@
+# Fashion Editorial Illustration Style Olog
+# Part of the Illustrative Visual Vocabulary taxonomy
+
+name: Fashion Editorial
+id: fashion
+
+description: |
+  Stylized illustration style emphasizing elegant lines and exaggerated proportions.
+  Often features monochromatic or limited color palettes with dramatic accent colors.
+  Combines graphic flatness with dramatic flourishes. Used in fashion design,
+  editorial spreads, and couture illustration. Emphasizes silhouette and pose.
+
+visual_parameters:
+  edge_treatment:
+    - elegant, flowing lines
+    - expressive linework
+    - stylized contours
+    - fashion-forward simplification
+  
+  color_strategy:
+    - sophisticated palette
+    - often monochromatic or limited
+    - high-fashion color sensibility
+    - dramatic accent colors
+  
+  texture_approach:
+    - mixed texture approach
+    - graphic flatness with dramatic flourishes
+    - texture for fabric emphasis
+    - stylized not photorealistic
+  
+  lighting_model:
+    - dramatic, editorial lighting
+    - strong directional light
+    - theatrical illumination
+    - fashion photography-inspired but stylized
+  
+  line_weight:
+    - variable line weight for expression
+    - elegant, flowing strokes
+    - expressive but controlled
+    - fashion-illustration style
+  
+  depth_handling:
+    - figure-forward composition
+    - simplified backgrounds
+    - focus on silhouette
+    - dramatic foreshortening
+  
+  compositional_rules:
+    - elongated proportions
+    - dynamic pose emphasis
+    - fashion-forward framing
+    - editorial sensibility
+
+negative_prompt_elements:
+  - realistic proportions
+  - photorealism
+  - casual everyday aesthetic
+  - neutral presentation
+  - busy backgrounds
+  - anatomical accuracy over style
+  - realistic fabric rendering
+
+use_cases:
+  - Fashion design sketches
+  - Editorial magazine layouts
+  - Couture illustration
+  - Runway presentation
+  - Fashion concept art
+  - Style guides
+  - Designer portfolios
+
+style_drift_prevention: |
+  The negative blocks prevent realistic anatomy and everyday aesthetics from
+  overriding the stylized, fashion-forward nature of the style. Emphasis on
+  dramatic proportions and editorial sensibility prevents drift toward
+  photorealism or anatomical accuracy.

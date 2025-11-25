@@ -1,0 +1,79 @@
+# Technical Illustration Style Olog
+# Part of the Illustrative Visual Vocabulary taxonomy
+
+name: Technical Illustration
+id: technical
+
+description: |
+  Precise, clean illustration style emphasizing mechanical accuracy and clarity.
+  Uses isometric or orthographic perspectives for unambiguous representation.
+  Typically employs muted, professional color palettes with strategic accent colors.
+  Used in diagrams, specifications, medical illustrations, and technical documentation.
+
+visual_parameters:
+  edge_treatment:
+    - precise, clean lines
+    - exact geometric edges
+    - mechanical precision
+    - technical accuracy
+  
+  color_strategy:
+    - muted, professional palette
+    - strategic color for emphasis
+    - grayscale with accent colors
+    - limited, functional colors
+  
+  texture_approach:
+    - smooth, clean rendering
+    - no organic randomness
+    - precise surface definition
+    - clinical accuracy
+  
+  lighting_model:
+    - even, consistent lighting
+    - clear visibility
+    - minimal atmospheric effects
+    - functional illumination
+  
+  line_weight:
+    - consistent, precise line weight
+    - technical rendering
+    - mechanical exactitude
+    - clean vector-like quality
+  
+  depth_handling:
+    - isometric or orthographic perspective
+    - clear depth indication
+    - cutaway views when needed
+    - anatomical/structural clarity
+  
+  compositional_rules:
+    - functional layout
+    - emphasis on clarity
+    - hierarchy of importance
+    - unambiguous representation
+
+negative_prompt_elements:
+  - artistic interpretation
+  - atmospheric effects
+  - painterly texture
+  - soft edges
+  - color grading
+  - cinematic lighting
+  - stylization
+  - impressionistic rendering
+
+use_cases:
+  - Technical diagrams
+  - Medical illustrations
+  - Engineering drawings
+  - Product specifications
+  - Assembly instructions
+  - Architectural plans
+  - Scientific illustrations
+
+style_drift_prevention: |
+  The negative blocks prevent artistic interpretation and atmospheric effects
+  from compromising the technical clarity and precision essential to the style.
+  Emphasis on mechanical exactitude prevents drift toward painterly or
+  impressionistic rendering.
