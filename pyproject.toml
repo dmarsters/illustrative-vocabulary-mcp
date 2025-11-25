@@ -25,9 +25,6 @@ dev = [
     "mypy>=1.0",
 ]
 
-[project.scripts]
-illustrative-vocabulary-mcp = "illustrative_vocabulary_mcp.server:mcp"
-
 [tool.setuptools]
 package-dir = {"" = "src"}
 packages = ["illustrative_vocabulary_mcp"]
