@@ -26,7 +26,7 @@ dev = [
 ]
 
 [project.scripts]
-illustrative-vocabulary-mcp = "illustrative_vocabulary_mcp.server:main"
+illustrative-vocabulary-mcp = "illustrative_vocabulary_mcp.server:mcp"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
