@@ -792,6 +792,3 @@ def main() -> None:
     
     # No loop running, safe to call run()
     mcp.run()
-
-if __name__ == "__main__":
-    main()
