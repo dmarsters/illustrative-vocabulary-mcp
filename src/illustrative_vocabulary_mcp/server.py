@@ -773,22 +773,6 @@ async def export_prompt_elements(params: IntentAnalysisInput) -> str:
     
     except ValueError as e:
         return json.dumps({"error": str(e)}, indent=2)
-
-
-def main() -> None:
-    """Entry point for the MCP server."""
-    import asyncio
-    import sys
-    
-    try:
-        # Try to get the current event loop
-        loop = asyncio.get_event_loop()
-        if loop.is_running():
-            # Loop already running - we're in FastMCP Cloud
-            # Don't call run(), just let the framework handle it
-            return
-    except RuntimeError:
-        pass
-    
-    # No loop running, safe to call run()
+  
+if __name__ == "__main__":
     mcp.run()
