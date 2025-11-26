@@ -12,24 +12,11 @@ styles, preventing downstream style drift.
 """
 
 import json
-from enum import Enum
-from typing import Optional, Dict, Any, List
-from pydantic import BaseModel, Field, ConfigDict
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 
 # ============================================================================
 # LAYER 2: DETERMINISTIC TAXONOMY - Pure lookup functions (zero LLM cost)
 # ============================================================================
-
-class IllustrationStyle(str, Enum):
-    """Primary illustration styles with locked visual parameters."""
-    COMIC_BOOK = "comic_book"
-    CHILDREN_BOOK = "children_book"
-    TECHNICAL = "technical"
-    FASHION = "fashion"
-    WATERCOLOR = "watercolor"
-    CONCEPT_ART = "concept_art"
-
 
 # Deterministic taxonomy - maps style to locked visual parameters
 ILLUSTRATION_TAXONOMY = {
@@ -360,7 +347,7 @@ ILLUSTRATION_TAXONOMY = {
 }
 
 
-def get_style_parameters(style: str) -> Dict[str, Any]:
+def get_style_parameters(style: str) -> dict:
     """
     LAYER 2: Deterministic taxonomy lookup.
     Returns locked visual parameters for specified illustration style.
@@ -379,11 +366,11 @@ def get_style_parameters(style: str) -> Dict[str, Any]:
     
     raise ValueError(
         f"Style '{style}' not found. Available styles: "
-        f"{', '.join([s.value for s in IllustrationStyle])}"
+        f"{', '.join(ILLUSTRATION_TAXONOMY.keys())}"
     )
 
 
-def format_parameters_as_prompt_elements(params: Dict[str, Any]) -> str:
+def format_parameters_as_prompt_elements(params: dict) -> str:
     """Convert locked parameters to prompt-friendly text elements."""
     elements = []
     
@@ -397,82 +384,6 @@ def format_parameters_as_prompt_elements(params: Dict[str, Any]) -> str:
 
 
 # ============================================================================
-# LAYER 1: INTENT ANALYSIS - Pydantic models for input validation
-# ============================================================================
-
-class IntentAnalysisInput(BaseModel):
-    """Parse user's creative intent for illustrative work."""
-    
-    model_config = ConfigDict(
-        str_strip_whitespace=True,
-        validate_assignment=True,
-        extra='forbid'
-    )
-    
-    user_prompt: str = Field(
-        ...,
-        description="User's request for illustrative artwork (e.g., 'I want a comic book style scene of a cyberpunk street')",
-        min_length=10,
-        max_length=1000
-    )
-    
-    illustration_style: str = Field(
-        ...,
-        description="Target illustration style: comic_book, children_book, technical, fashion, watercolor, or concept_art",
-        min_length=3,
-        max_length=50
-    )
-
-
-class ParameterOverrideInput(BaseModel):
-    """Allow users to override specific parameters from the taxonomy."""
-    
-    model_config = ConfigDict(
-        str_strip_whitespace=True,
-        validate_assignment=True,
-        extra='forbid'
-    )
-    
-    illustration_style: str = Field(
-        ...,
-        description="Base illustration style to start from",
-        min_length=3,
-        max_length=50
-    )
-    
-    override_color_strategy: Optional[List[str]] = Field(
-        default=None,
-        description="Override default color approach (list of color strategy descriptions)",
-        max_length=5
-    )
-    
-    override_lighting: Optional[List[str]] = Field(
-        default=None,
-        description="Override default lighting model (list of lighting descriptions)",
-        max_length=5
-    )
-    
-    override_edges: Optional[List[str]] = Field(
-        default=None,
-        description="Override default edge treatment (list of edge descriptions)",
-        max_length=5
-    )
-
-
-class StyleComparisonInput(BaseModel):
-    """Compare visual parameters between two illustration styles."""
-    
-    model_config = ConfigDict(
-        str_strip_whitespace=True,
-        validate_assignment=True,
-        extra='forbid'
-    )
-    
-    style1: str = Field(..., description="First illustration style to compare", min_length=3, max_length=50)
-    style2: str = Field(..., description="Second illustration style to compare", min_length=3, max_length=50)
-
-
-# ============================================================================
 # MCP SERVER INITIALIZATION
 # ============================================================================
 
@@ -483,17 +394,8 @@ mcp = FastMCP("illustrative_vocabulary_mcp")
 # LAYER 2: DETERMINISTIC TOOLS (Pure taxonomy operations)
 # ============================================================================
 
-@mcp.tool(
-    name="get_style_taxonomy",
-    annotations={
-        "title": "Get Illustration Style Taxonomy",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False
-    }
-)
-async def get_style_taxonomy(params: IntentAnalysisInput) -> str:
+@mcp.tool()
+def get_style_taxonomy(illustration_style: str) -> str:
     """
     Retrieve locked visual parameters for a specific illustration style.
     
@@ -501,13 +403,13 @@ async def get_style_taxonomy(params: IntentAnalysisInput) -> str:
     Returns all visual parameters that prevent style drift for the chosen style.
     
     Args:
-        params (IntentAnalysisInput): User request and target style
+        illustration_style: Target style (comic_book, children_book, technical, fashion, watercolor, concept_art)
     
     Returns:
         str: JSON with locked visual parameters for the illustration style
     """
     try:
-        style_params = get_style_parameters(params.illustration_style)
+        style_params = get_style_parameters(illustration_style)
         
         result = {
             "style": style_params["style_name"],
@@ -534,17 +436,8 @@ async def get_style_taxonomy(params: IntentAnalysisInput) -> str:
         return json.dumps({"error": str(e)}, indent=2)
 
 
-@mcp.tool(
-    name="list_available_styles",
-    annotations={
-        "title": "List Available Illustration Styles",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False
-    }
-)
-async def list_available_styles() -> str:
+@mcp.tool()
+def list_available_styles() -> str:
     """
     List all available illustration styles with brief descriptions.
     
@@ -568,17 +461,8 @@ async def list_available_styles() -> str:
     return json.dumps({"available_styles": styles}, indent=2)
 
 
-@mcp.tool(
-    name="compare_styles",
-    annotations={
-        "title": "Compare Two Illustration Styles",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False
-    }
-)
-async def compare_styles(params: StyleComparisonInput) -> str:
+@mcp.tool()
+def compare_styles(style1: str, style2: str) -> str:
     """
     Compare visual parameters between two illustration styles.
     
@@ -586,14 +470,15 @@ async def compare_styles(params: StyleComparisonInput) -> str:
     Useful for understanding differences and preventing unintended style drift.
     
     Args:
-        params (StyleComparisonInput): Two styles to compare
+        style1: First style to compare
+        style2: Second style to compare
     
     Returns:
         str: JSON with side-by-side parameter comparison
     """
     try:
-        style1_params = get_style_parameters(params.style1)
-        style2_params = get_style_parameters(params.style2)
+        style1_params = get_style_parameters(style1)
+        style2_params = get_style_parameters(style2)
         
         comparison = {
             "style_1": style1_params["style_name"],
@@ -624,17 +509,9 @@ async def compare_styles(params: StyleComparisonInput) -> str:
         return json.dumps({"error": str(e)}, indent=2)
 
 
-@mcp.tool(
-    name="override_parameters",
-    annotations={
-        "title": "Override Style Parameters",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False
-    }
-)
-async def override_parameters(params: ParameterOverrideInput) -> str:
+@mcp.tool()
+def override_parameters(illustration_style: str, override_color_strategy: list = None, 
+                       override_lighting: list = None, override_edges: list = None) -> str:
     """
     Create a custom parameter set by overriding specific aspects of a base style.
     
@@ -642,25 +519,28 @@ async def override_parameters(params: ParameterOverrideInput) -> str:
     Allows users to mix-and-match locked parameters while maintaining consistency.
     
     Args:
-        params (ParameterOverrideInput): Base style and specific overrides
+        illustration_style: Base style to start from
+        override_color_strategy: Optional list of color strategy descriptions to override
+        override_lighting: Optional list of lighting descriptions to override
+        override_edges: Optional list of edge descriptions to override
     
     Returns:
         str: JSON with modified parameter set
     """
     try:
-        base_params = get_style_parameters(params.illustration_style)
+        base_params = get_style_parameters(illustration_style)
         
         # Apply overrides
         result = base_params.copy()
         
-        if params.override_color_strategy:
-            result["color_strategy"] = params.override_color_strategy
+        if override_color_strategy:
+            result["color_strategy"] = override_color_strategy
         
-        if params.override_lighting:
-            result["lighting_model"] = params.override_lighting
+        if override_lighting:
+            result["lighting_model"] = override_lighting
         
-        if params.override_edges:
-            result["edge_treatment"] = params.override_edges
+        if override_edges:
+            result["edge_treatment"] = override_edges
         
         custom_set = {
             "base_style": base_params["style_name"],
@@ -688,30 +568,21 @@ async def override_parameters(params: ParameterOverrideInput) -> str:
 # INFORMATION & REFERENCE TOOLS
 # ============================================================================
 
-@mcp.tool(
-    name="get_style_details",
-    annotations={
-        "title": "Get Detailed Style Information",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False
-    }
-)
-async def get_style_details(params: IntentAnalysisInput) -> str:
+@mcp.tool()
+def get_style_details(illustration_style: str) -> str:
     """
     Get comprehensive details about a specific illustration style.
     
     Includes all locked parameters, negative prompt elements, and usage guidance.
     
     Args:
-        params (IntentAnalysisInput): Illustration style to detail
+        illustration_style: Illustration style to detail
     
     Returns:
         str: JSON with complete style specification
     """
     try:
-        style_params = get_style_parameters(params.illustration_style)
+        style_params = get_style_parameters(illustration_style)
         
         details = {
             "style": style_params["style_name"],
@@ -729,17 +600,8 @@ async def get_style_details(params: IntentAnalysisInput) -> str:
         return json.dumps({"error": str(e)}, indent=2)
 
 
-@mcp.tool(
-    name="export_prompt_elements",
-    annotations={
-        "title": "Export Parameters as Prompt Elements",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": False
-    }
-)
-async def export_prompt_elements(params: IntentAnalysisInput) -> str:
+@mcp.tool()
+def export_prompt_elements(illustration_style: str) -> str:
     """
     Export locked parameters as prompt-friendly text elements.
     
@@ -747,13 +609,13 @@ async def export_prompt_elements(params: IntentAnalysisInput) -> str:
     These elements are locked to prevent the lighting/style drift Koray experienced.
     
     Args:
-        params (IntentAnalysisInput): Illustration style to export
+        illustration_style: Illustration style to export
     
     Returns:
         str: Formatted prompt elements and negative prompt
     """
     try:
-        style_params = get_style_parameters(params.illustration_style)
+        style_params = get_style_parameters(illustration_style)
         
         positive_elements = format_parameters_as_prompt_elements(style_params)
         negative_elements = ", ".join(style_params["negative_prompt_elements"])
@@ -773,6 +635,7 @@ async def export_prompt_elements(params: IntentAnalysisInput) -> str:
     
     except ValueError as e:
         return json.dumps({"error": str(e)}, indent=2)
-  
+
+
 if __name__ == "__main__":
     mcp.run()
