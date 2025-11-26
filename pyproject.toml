@@ -5,11 +5,10 @@ build-backend = "hatchling.build"
 [project]
 name = "illustrative-vocabulary-mcp"
 version = "0.1.0"
-description = "MCP server providing deterministic visual vocabulary for illustrative artwork, preventing style drift"
+description = "MCP server providing deterministic visual vocabulary for illustrative artwork"
 requires-python = ">=3.9"
 dependencies = [
     "fastmcp>=0.1.0",
-    "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
