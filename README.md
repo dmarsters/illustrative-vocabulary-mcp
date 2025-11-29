@@ -4,14 +4,12 @@ Solves the **style drift problem** where illustration types (photographic vs. il
 
 ## Problem Statement
 
-As Koray mentioned:
-> "I would like to choose the styles MJ gives me. I would like to give keywords like 'photographic' or 'illustrative' because when I choose an illustrative style for its lighting the final style goes illustrative. It's hard to keep in track."
-
 **Root cause**: Style keywords are interpreted flexibly by generative models. Downstream rendering choices (especially lighting) can reinterpret the entire aesthetic, so "illustrative" becomes photorealistic, or vice versa.
 
 **Solution**: This MCP server provides **locked visual parameter sets** that act as semantic anchors. Instead of just saying "illustrative," you get:
 - Hard edges + limited color palette + flat surfaces + dramatic lighting + no depth blur
 - These parameters are locked and cannot be overridden by downstream choices
+- Part of the Lushy.app Visual Vocabulary ecosystem
 
 ## Three-Layer Architecture
 
@@ -229,17 +227,13 @@ By separating deterministic taxonomy from creative synthesis, we achieve:
 - [ ] Add user-created custom style vocabularies
 - [ ] Integration with prompt-to-image workflow systems (ComfyUI, etc.)
 
-## For Lushy Integration
-
-This MCP server is designed to integrate with Lushy workflows:
-
-1. **Workflow Template**: Use as MCP tool in ComfyUI custom workflows
-2. **Creator Tools**: Package as aesthetic enhancement tool for creators monetizing workflows
-3. **Academic Market**: Reproducibility showcase - locked parameters = reproducible aesthetics
-4. **Paid Access**: Offer extended style libraries as premium feature
-
 ## References
 
-- **Problem Source**: LinkedIn post by Koray Şahan (Starter founder)
 - **Architecture**: Three-layer categorical pattern using ologs + single LLM synthesis
 - **Cost Model**: Achieves ~60% cost reduction vs. pure LLM prompting
+
+## License
+MIT
+
+## Author
+Dal Marsters
